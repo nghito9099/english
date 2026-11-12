@@ -7,13 +7,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
 :root{--ink:#262345;--pink:#ff6fae;--yellow:#ffd66b;--blue:#8edcf4;--purple:#a994ff;--cream:#fff9ed}
 *{box-sizing:border-box}body{margin:0;background:#17152b;color:var(--ink);font-family:Nunito,sans-serif;overflow:hidden}
-.deck{height:100dvh;width:100vw;position:relative}.slide{display:none;position:absolute;inset:0;padding:clamp(22px,5vw,72px);overflow:auto;background:var(--cream);animation:in .45s ease}
-.slide.active{display:flex;flex-direction:column;justify-content:center}
-@keyframes in{from{opacity:0;transform:translateY(16px) scale(.99)}to{opacity:1;transform:none}}
+.deck{height:100dvh;width:100vw;position:relative}.slide{display:flex;flex-direction:column;justify-content:center;position:absolute;inset:0;padding:clamp(22px,5vw,72px);overflow:auto;background:var(--cream);visibility:hidden;pointer-events:none;opacity:0;transform:translateX(70px) scale(.985);z-index:0}
+.slide.active{visibility:visible;pointer-events:auto;opacity:1;transform:none;z-index:2}
+.slide.enter-next{animation:slideInNext .62s cubic-bezier(.22,.8,.24,1) both}
+.slide.enter-prev{animation:slideInPrev .62s cubic-bezier(.22,.8,.24,1) both}
+.slide.exit-next{animation:slideOutNext .5s cubic-bezier(.55,.1,.8,.2) both}
+.slide.exit-prev{animation:slideOutPrev .5s cubic-bezier(.55,.1,.8,.2) both}
+@keyframes slideInNext{from{opacity:0;transform:translateX(75px) scale(.97);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}
+@keyframes slideInPrev{from{opacity:0;transform:translateX(-75px) scale(.97);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}
+@keyframes slideOutNext{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-55px) scale(.985)}}
+@keyframes slideOutPrev{from{opacity:1;transform:none}to{opacity:0;transform:translateX(55px) scale(.985)}}
 .slide:before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:#ffd66b55;right:-120px;top:-130px;pointer-events:none}
 .kicker{font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#8d78dd;font-size:.78rem}
 h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Fredoka,sans-serif;line-height:1.04}h1{font-size:clamp(3.3rem,8vw,7.6rem);margin:.2em 0}h2{font-size:clamp(2.3rem,5vw,4.5rem);margin:.18em 0 .35em}h3{font-size:1.55rem;margin-bottom:.45em}p,li{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.55}.lead{font-size:clamp(1.2rem,2vw,1.7rem);max-width:780px}.accent{color:#ee5597}.tag{display:inline-block;background:#fff;border:2px solid #282345;border-radius:99px;padding:8px 15px;font-weight:900;margin:4px}
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}.hero-art{position:relative;min-height:390px}.hero-art img{position:absolute;object-fit:contain;filter:drop-shadow(0 18px 12px #29234525);animation:float 5s ease-in-out infinite}.hero-art img:nth-child(1){width:48%;height:82%;left:0;top:8%}.hero-art img:nth-child(2){width:47%;height:72%;right:0;top:0;animation-delay:-1.5s}.hero-art img:nth-child(3){width:48%;height:58%;left:27%;bottom:0;animation-delay:-2.5s}
+.hero,.grid,.split,.timeline,.quizbox,.quote,.card,.kicker,h1,h2,h3,p,ul,.facts,.tag,.end-art{animation:contentIn .58s cubic-bezier(.22,.8,.24,1) both}
+.slide.enter-next .hero,.slide.enter-next .grid,.slide.enter-next .split,.slide.enter-next .timeline,.slide.enter-next .quizbox,.slide.enter-next .quote,.slide.enter-next .card,.slide.enter-next .kicker,.slide.enter-next h1,.slide.enter-next h2,.slide.enter-next h3,.slide.enter-next p,.slide.enter-next ul,.slide.enter-next .facts,.slide.enter-next .tag,.slide.enter-next .end-art{animation:contentIn .58s cubic-bezier(.22,.8,.24,1) both}
+.slide.enter-prev .hero,.slide.enter-prev .grid,.slide.enter-prev .split,.slide.enter-prev .timeline,.slide.enter-prev .quizbox,.slide.enter-prev .quote,.slide.enter-prev .card,.slide.enter-prev .kicker,.slide.enter-prev h1,.slide.enter-prev h2,.slide.enter-prev h3,.slide.enter-prev p,.slide.enter-prev ul,.slide.enter-prev .facts,.slide.enter-prev .tag,.slide.enter-prev .end-art{animation:contentInPrev .58s cubic-bezier(.22,.8,.24,1) both}
+.grid > *:nth-child(2),.timeline > *:nth-child(2),.facts .tag:nth-child(2){animation-delay:.06s}
+.grid > *:nth-child(3),.timeline > *:nth-child(3),.facts .tag:nth-child(3){animation-delay:.12s}
+.grid > *:nth-child(4),.facts .tag:nth-child(4){animation-delay:.18s}
+@keyframes contentIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes contentInPrev{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
 @keyframes float{50%{transform:translateY(-13px) rotate(2deg)}}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.card{background:#fff;border:2px solid var(--ink);border-radius:25px;padding:22px;box-shadow:7px 7px 0 var(--ink);min-width:0}.card p{margin-bottom:0}.card-img{width:100%;height:210px;object-fit:contain;background:#f4efff;border-radius:17px;margin-bottom:16px}.split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}.poster{width:100%;max-height:480px;object-fit:contain;border-radius:24px;background:#f4efff}.facts{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.quote{font-family:Fredoka,sans-serif;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.2;background:#fff0f6;border-left:8px solid var(--pink);padding:22px;border-radius:0 20px 20px 0}
 .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}.step{padding:20px;border-radius:20px;background:#eaf9ff;border:2px solid #282345}.step b{font:700 2rem Fredoka;color:#7963d0}
@@ -71,8 +86,28 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Fredoka,sans-serif;line-height:1.04
 </main>
 <div class="progress" id="progress"></div><div class="nav"><span class="count" id="count">1 / 12</span><button id="prev" disabled>← Back</button><button id="next">Next →</button></div>
 <script>
-const slides=[...document.querySelectorAll('.slide')];let current=0;
-function show(n){current=Math.max(0,Math.min(n,slides.length-1));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('count').textContent=(current+1)+' / '+slides.length;document.getElementById('prev').disabled=current===0;document.getElementById('next').textContent=current===slides.length-1?'Start again ↺':'Next →';document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%'}
+const slides=[...document.querySelectorAll('.slide')];let current=0;let transitioning=false;
+function show(n){
+  n=Math.max(0,Math.min(n,slides.length-1));
+  if(n===current && slides[current].classList.contains('active'))return;
+  if(transitioning)return;
+  const oldIndex=current, direction=n>oldIndex?'next':'prev', oldSlide=slides[oldIndex], newSlide=slides[n];
+  transitioning=true;
+  oldSlide.classList.remove('enter-next','enter-prev','exit-next','exit-prev');
+  newSlide.classList.remove('enter-next','enter-prev','exit-next','exit-prev');
+  oldSlide.classList.add(direction==='next'?'exit-next':'exit-prev');
+  newSlide.classList.add('active',direction==='next'?'enter-next':'enter-prev');
+  current=n;
+  document.getElementById('count').textContent=(current+1)+' / '+slides.length;
+  document.getElementById('prev').disabled=current===0;
+  document.getElementById('next').textContent=current===slides.length-1?'Start again ↺':'Next →';
+  document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+  setTimeout(()=>{
+    oldSlide.classList.remove('active','exit-next','exit-prev');
+    newSlide.classList.remove('enter-next','enter-prev');
+    transitioning=false;
+  },620);
+}
 document.getElementById('next').onclick=()=>show(current===slides.length-1?0:current+1);document.getElementById('prev').onclick=()=>show(current-1);
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(current+1)}if(e.key==='ArrowLeft')show(current-1);if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}});
 const quiz=[
@@ -84,6 +119,17 @@ const quiz=[
 ];let qi=0,score=0;
 function loadQ(){const q=quiz[qi];document.getElementById('qcount').textContent='QUESTION '+(qi+1)+' / '+quiz.length;document.getElementById('question').textContent=q.q;document.getElementById('feedback').textContent='';document.getElementById('nextq').style.display='none';const box=document.getElementById('answers');box.innerHTML='';q.a.forEach((a,i)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+i)+'. '+a;b.onclick=()=>{[...box.children].forEach(x=>x.disabled=true);if(i===q.c){score++;b.style.background='#d9f8df';document.getElementById('feedback').textContent='✓ '+q.why}else{b.style.background='#ffe0e8';box.children[q.c].style.background='#d9f8df';document.getElementById('feedback').textContent='Not quite. '+q.why}document.getElementById('nextq').style.display='inline-block';};box.appendChild(b)})}
 document.getElementById('nextq').onclick=()=>{qi++;if(qi<quiz.length)loadQ();else{document.getElementById('qcount').textContent='QUIZ COMPLETE';document.getElementById('question').textContent='You scored '+score+' out of '+quiz.length+'!';document.getElementById('answers').innerHTML='<p>Great job, everyone! 🎉</p>';document.getElementById('feedback').textContent='Remember: the best stories leave us with something meaningful.';document.getElementById('nextq').style.display='none';}};
-loadQ();show(0);
+loadQ();
+slides.forEach((s,i)=>{if(i!==0)s.classList.remove('active')});
+show(0);
+
 </script>
 </body></html>
+
+<style>
+@media (prefers-reduced-motion: reduce){
+  .slide,.slide.enter-next,.slide.enter-prev,.slide.exit-next,.slide.exit-prev,
+  .hero,.grid,.split,.timeline,.quizbox,.quote,.card,.kicker,h1,h2,h3,p,ul,.facts,.tag,.end-art,
+  .hero-art img{animation:none!important;transition:none!important}
+}
+</style>
