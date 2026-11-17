@@ -49,14 +49,97 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Fredoka,sans-serif;line-height:1.04
   .focus-shift .feature-card .card-img{height:230px}
 }
 
+/* Interactive hero character scenes */
+.hero-facts{position:relative;z-index:4}
+.hero-trigger{font:900 1rem Nunito;cursor:pointer;appearance:none;-webkit-appearance:none;color:var(--ink);transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+.hero-trigger:hover{transform:translateY(-4px) rotate(-.5deg);background:#fff7fb;box-shadow:4px 4px 0 var(--ink)}
+.hero-trigger:focus-visible{outline:4px solid var(--pink);outline-offset:3px}
+
+.hero-art{overflow:visible}
+.hero-art .hero-show{transition:opacity .45s ease,visibility .45s ease}
+.hero-specials{position:absolute;inset:0;pointer-events:none;opacity:0;visibility:hidden;z-index:5;transition:opacity .35s ease,visibility .35s ease}
+.hero-special{position:absolute;display:block;opacity:0;transform:translateY(-120vh) scale(.78);width:26%;height:38%;will-change:transform,opacity}
+.hero-special img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 16px 12px #29234525);will-change:transform}
+.hero-specials-steven .hero-special img{animation:heroGentleFloat 3.8s ease-in-out infinite}
+.hero-specials-adventure .hero-special img{animation:heroGentleFloat 4.1s ease-in-out infinite}
+
+.hero-art.mode-steven .hero-show:not(.hero-steven),
+.hero-art.mode-adventure .hero-show,
+.hero-art.mode-powerpuff .hero-show:not(.hero-powerpuff),
+.hero-art.mode-masha .hero-show:not(.hero-masha){opacity:0;visibility:hidden}
+
+.hero-art.mode-steven .hero-specials-steven,
+.hero-art.mode-adventure .hero-specials-adventure{opacity:1;visibility:visible}
+
+.hero-art.mode-steven .hero-special{animation:heroDropIn .95s cubic-bezier(.2,.85,.25,1) forwards}
+.hero-art.mode-adventure .hero-special{animation:heroDropIn .95s cubic-bezier(.2,.85,.25,1) forwards}
+
+.hero-art.mode-steven .special-pearl{left:46%;top:5%;width:22%;height:38%;animation-delay:.04s}
+.hero-art.mode-steven .special-amethyst{left:63%;top:18%;width:23%;height:39%;animation-delay:.18s}
+.hero-art.mode-steven .special-garnet{left:76%;top:0%;width:24%;height:43%;animation-delay:.32s}
+
+.hero-art.mode-adventure .special-finn{left:8%;top:4%;width:23%;height:42%;animation-delay:.02s}
+.hero-art.mode-adventure .special-jake{left:29%;top:19%;width:23%;height:39%;animation-delay:.16s}
+.hero-art.mode-adventure .special-bubblegum{left:52%;top:1%;width:22%;height:43%;animation-delay:.30s}
+.hero-art.mode-adventure .special-marceline{left:73%;top:16%;width:25%;height:41%;animation-delay:.44s}
+
+.hero-art.mode-powerpuff .hero-powerpuff{animation:heroZoomFloat 4.2s ease-in-out infinite}
+.hero-art.mode-masha .hero-masha{animation:heroZoomFloat 4.2s ease-in-out infinite -1s}
+
+@keyframes heroDropIn{
+  0%{opacity:0;transform:translateY(-120vh) scale(.78) rotate(-5deg)}
+  72%{opacity:1;transform:translateY(8px) scale(1.02) rotate(1deg)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+@keyframes heroGentleFloat{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-11px) rotate(1.5deg)}
+}
+@keyframes heroZoomFloat{
+  0%,100%{transform:scale(1.6) translateY(0) rotate(-1deg)}
+  50%{transform:scale(1.6) translateY(-13px) rotate(1.5deg)}
+}
+@media(max-width:760px){
+  .hero-trigger{font-size:.88rem;padding:7px 11px}
+  .hero-art.mode-steven .special-pearl{left:40%;top:3%;width:28%;height:34%}
+  .hero-art.mode-steven .special-amethyst{left:58%;top:18%;width:28%;height:35%}
+  .hero-art.mode-steven .special-garnet{left:70%;top:0%;width:30%;height:38%}
+  .hero-art.mode-adventure .special-finn{left:2%;top:2%;width:28%;height:38%}
+  .hero-art.mode-adventure .special-jake{left:25%;top:17%;width:28%;height:35%}
+  .hero-art.mode-adventure .special-bubblegum{left:51%;top:0%;width:27%;height:39%}
+  .hero-art.mode-adventure .special-marceline{left:73%;top:16%;width:29%;height:36%}
+}
 </style>
 </head>
 <body>
 <div class="topnote">✦ ENGLISH PROJECT · CARTOON CULTURE</div>
 <main class="deck" id="deck">
 <section class="slide active">
- <div class="hero"><div><div class="kicker">A journey through imagination</div><h1>BEYOND<br>THE <span class="accent">SCREEN</span></h1><p class="lead">How cartoons entertain us, inspire us, and teach us about life.</p><div class="facts"><span class="tag">Steven Universe</span><span class="tag">Adventure Time</span><span class="tag">The Powerpuff Girls</span><span class="tag">Masha and the Bear</span></div><p class="small">An interactive English presentation · Approx. 30 minutes</p></div>
- <div class="hero-art"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Steven%20Universe%20sprite.png" alt="Steven Universe character illustration"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tree%20House%20Adventure%20Time.png" alt="Adventure Time tree house illustration"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Powerpuff%20Girls%202016%20reboot%20main%20characters.svg" alt="The Powerpuff Girls illustration"><img src="https://pngimg.com/d/masha_and_bear_PNG8.png" alt="Masha and the Bear illustration"></div></div>
+ <div class="hero"><div><div class="kicker">A journey through imagination</div><h1>BEYOND<br>THE <span class="accent">SCREEN</span></h1><p class="lead">How cartoons entertain us, inspire us, and teach us about life.</p><div class="facts hero-facts">
+ <button class="tag hero-trigger" type="button" data-hero-mode="steven">Steven Universe</button>
+ <button class="tag hero-trigger" type="button" data-hero-mode="adventure">Adventure Time</button>
+ <button class="tag hero-trigger" type="button" data-hero-mode="powerpuff">The Powerpuff Girls</button>
+ <button class="tag hero-trigger" type="button" data-hero-mode="masha">Masha and the Bear</button>
+</div><p class="small">An interactive English presentation · Approx. 30 minutes</p></div>
+ <div class="hero-art" id="heroArt">
+  <img class="hero-show hero-steven" src="https://commons.wikimedia.org/wiki/Special:FilePath/Steven%20Universe%20sprite.png" alt="Steven Universe character illustration">
+  <img class="hero-show hero-adventure" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tree%20House%20Adventure%20Time.png" alt="Adventure Time tree house illustration">
+  <img class="hero-show hero-powerpuff" src="https://commons.wikimedia.org/wiki/Special:FilePath/Powerpuff%20Girls%202016%20reboot%20main%20characters.svg" alt="The Powerpuff Girls illustration">
+  <img class="hero-show hero-masha" src="https://pngimg.com/d/masha_and_bear_PNG8.png" alt="Masha and the Bear illustration">
+
+  <div class="hero-specials hero-specials-steven" aria-hidden="true">
+    <span class="hero-special special-pearl"><img src="https://media1.tenor.com/m/NGVXmnQ8mIwAAAAd/steven-universe-pearl.gif" alt="Pearl animated GIF"></span>
+    <span class="hero-special special-amethyst"><img src="https://media1.tenor.com/m/M4vGatkiyHgAAAAd/amethyst-steven-universe-amethyst.gif" alt="Amethyst animated GIF"></span>
+    <span class="hero-special special-garnet"><img src="https://media1.tenor.com/m/22rcnlDDBy0AAAAd/steven-universe-garnet.gif" alt="Garnet animated GIF"></span>
+  </div>
+
+  <div class="hero-specials hero-specials-adventure" aria-hidden="true">
+    <span class="hero-special special-finn"><img src="https://media1.tenor.com/m/qmM8yPkaAwIAAAAd/adventure-time-finn.gif" alt="Finn animated GIF"></span>
+    <span class="hero-special special-jake"><img src="https://media1.tenor.com/m/x0qsWuFf2pwAAAAd/adventure-time-jake-the-dog.gif" alt="Jake animated GIF"></span>
+    <span class="hero-special special-bubblegum"><img src="https://media1.tenor.com/m/UTHIh7PEYfsAAAAd/adventure-time-princess-bubblegum.gif" alt="Princess Bubblegum animated GIF"></span>
+    <span class="hero-special special-marceline"><img src="https://media1.tenor.com/m/mGPc5mj-MOcAAAAd/adventure-time-marceline.gif" alt="Marceline animated GIF"></span>
+  </div>
+</div></div>
 </section>
 <section class="slide"><div class="kicker">01 · Warm-up</div><h2>Why do we love cartoons?</h2><div class="grid">
  <article class="card"><h3>🎨 A world of creativity</h3><p>Cartoons build imaginative worlds with unique characters, colors, music, and stories.</p></article>
@@ -111,6 +194,21 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Fredoka,sans-serif;line-height:1.04
 <div class="progress" id="progress"></div><div class="nav"><span class="count" id="count">1 / 12</span><button id="prev" disabled>← Back</button><button id="next">Next →</button></div>
 <script>
 const slides=[...document.querySelectorAll('.slide')];let current=0;let transitioning=false;
+const heroArt=document.getElementById('heroArt');
+const heroTriggers=[...document.querySelectorAll('.hero-trigger')];
+heroTriggers.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const mode=btn.dataset.heroMode;
+    const wasSame=heroArt.classList.contains('mode-'+mode);
+    heroArt.classList.remove('mode-steven','mode-adventure','mode-powerpuff','mode-masha');
+    if(wasSame){
+      requestAnimationFrame(()=>requestAnimationFrame(()=>heroArt.classList.add('mode-'+mode)));
+    }else{
+      heroArt.classList.add('mode-'+mode);
+    }
+  });
+});
+
 function show(n){
   n=Math.max(0,Math.min(n,slides.length-1));
   if(n===current && slides[current].classList.contains('active'))return;
