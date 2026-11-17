@@ -85,8 +85,10 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Fredoka,sans-serif;line-height:1.04
 .hero-art.mode-adventure .special-bubblegum{left:50%;top:1%;animation-delay:.30s}
 .hero-art.mode-adventure .special-marceline{left:75%;top:16%;animation-delay:.44s}
 
-.hero-art.mode-powerpuff .hero-powerpuff{animation:heroZoomFloat 4.2s ease-in-out infinite}
-.hero-art.mode-masha .hero-masha{animation:heroZoomFloat 4.2s ease-in-out infinite -1s}
+.hero-art.mode-powerpuff .hero-powerpuff{animation:heroZoomFloatLarge 4.2s ease-in-out infinite}
+.hero-art.mode-masha .hero-masha{animation:heroZoomFloatLarge 4.2s ease-in-out infinite -1s}
+.hero-art.mode-powerpuff .hero-powerpuff{width:58%;height:88%;left:4%;top:5%}
+.hero-art.mode-masha .hero-masha{width:58%;height:88%;right:3%;top:5%}
 
 @keyframes heroDropIn{
   0%{opacity:0;transform:translateY(-120vh) scale(.78) rotate(-5deg)}
@@ -101,12 +103,18 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Fredoka,sans-serif;line-height:1.04
   0%,100%{transform:scale(1.6) translateY(0) rotate(-1deg)}
   50%{transform:scale(1.6) translateY(-13px) rotate(1.5deg)}
 }
+@keyframes heroZoomFloatLarge{
+  0%,100%{transform:scale(1.18) translateY(0) rotate(-1deg)}
+  50%{transform:scale(1.18) translateY(-13px) rotate(1.5deg)}
+}
 @media(max-width:760px){
   .hero-trigger{font-size:.88rem;padding:7px 11px}
   .hero-art.mode-steven .hero-special{width:42%;height:76%}
   .hero-art.mode-steven .special-pearl{left:-10%;top:8%}
   .hero-art.mode-steven .special-amethyst{left:29%;top:8%}
   .hero-art.mode-steven .special-garnet{left:68%;top:8%}
+  .hero-art.mode-powerpuff .hero-powerpuff{width:82%;height:88%;left:9%;top:5%}
+  .hero-art.mode-masha .hero-masha{width:82%;height:88%;right:9%;top:5%}
   .hero-art.mode-adventure .hero-special{width:23%;height:64%}
   .hero-art.mode-adventure .special-finn{left:0%;top:5%}
   .hero-art.mode-adventure .special-jake{left:25%;top:17%}
